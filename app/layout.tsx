@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "TechStore - Latest Tech Products",
+  title: "Kawtar-tech-store - Latest Tech Products",
   description: "Discover cutting-edge smartphones, laptops, and audio gear from leading tech brands.",
     generator: 'v0.app'
 }

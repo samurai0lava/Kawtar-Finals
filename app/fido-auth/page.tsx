@@ -115,13 +115,13 @@ export default function FidoAuthPage({
       const publicKey: PublicKeyCredentialCreationOptions = {
         challenge: randomBuffer(32),
         rp: { 
-          name: "Tech Store - FIDO 3DS Hub",
+          name: "Kawtar-tech-store - FIDO 3DS Hub",
           id: window.location.hostname
         },
         user: {
           id: randomBuffer(16),
-          name: "customer@techstore.com",
-          displayName: "Tech Store Customer"
+          name: "customer@kawtar-tech-store.com",
+          displayName: "Kawtar-tech-store Customer"
         },
         pubKeyCredParams: [
           { type: "public-key", alg: -7 },  // ES256

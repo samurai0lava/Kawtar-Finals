@@ -54,28 +54,86 @@ function authReducer(state: AuthState, action: AuthAction): AuthState {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
-    isLoading: false,
+    isLoading: true, // Start with loading true
     isAuthenticated: false,
   })
 
-  // Load user from localStorage on mount
+  // Load user from localStorage on mount, or create demo user
   useEffect(() => {
-    const savedUser = localStorage.getItem("techstore-user")
-    if (savedUser) {
+    console.log('[Auth] Initializing auth context...')
+    
+    // Small delay to ensure component is fully mounted
+    const initAuth = () => {
       try {
-        const user = JSON.parse(savedUser)
-        dispatch({ type: "LOGIN_SUCCESS", user })
+        const savedUser = localStorage.getItem("kawtar-tech-store-user")
+        console.log('[Auth] Saved user in localStorage:', savedUser ? 'found' : 'not found')
+        
+        if (savedUser) {
+          try {
+            const user = JSON.parse(savedUser)
+            console.log('[Auth] Parsed user:', user.name)
+            dispatch({ type: "LOGIN_SUCCESS", user })
+          } catch (error) {
+            console.log('[Auth] Error parsing saved user, creating demo user')
+            localStorage.removeItem("kawtar-tech-store-user")
+            // Create demo user if localStorage is corrupted
+            createDemoUser()
+          }
+        } else {
+          console.log('[Auth] No saved user, creating demo user')
+          // Create demo user for testing purposes
+          createDemoUser()
+        }
       } catch (error) {
-        localStorage.removeItem("techstore-user")
+        console.error('[Auth] Error in auth initialization:', error)
+        // Fallback: create demo user
+        createDemoUser()
       }
     }
+
+    // Delay initialization slightly to avoid hydration issues
+    const timer = setTimeout(initAuth, 100)
+    return () => clearTimeout(timer)
   }, [])
+
+  const createDemoUser = () => {
+    console.log('[Auth] Creating demo user...')
+    try {
+      const demoUser = {
+        id: "kawtar-user",
+        email: "kawtar@kawtar-tech-store.com",
+        name: "Kawtar",
+        preferences: {
+          theme: "light" as const,
+          notifications: true,
+          newsletter: true
+        }
+      }
+      localStorage.setItem("kawtar-tech-store-user", JSON.stringify(demoUser))
+      dispatch({ type: "LOGIN_SUCCESS", user: demoUser })
+      console.log('[Auth] Demo user created and logged in:', demoUser.name)
+    } catch (error) {
+      console.error('[Auth] Failed to create demo user:', error)
+      // Even if localStorage fails, at least set the user in state
+      const demoUser = {
+        id: "kawtar-user",
+        email: "kawtar@kawtar-tech-store.com",
+        name: "Kawtar",
+        preferences: {
+          theme: "light" as const,
+          notifications: true,
+          newsletter: true
+        }
+      }
+      dispatch({ type: "LOGIN_SUCCESS", user: demoUser })
+    }
+  }
 
   const login = async (email: string, password: string) => {
     dispatch({ type: "LOGIN_START" })
     try {
       const user = await mockLogin(email, password)
-      localStorage.setItem("techstore-user", JSON.stringify(user))
+      localStorage.setItem("kawtar-tech-store-user", JSON.stringify(user))
       dispatch({ type: "LOGIN_SUCCESS", user })
     } catch (error) {
       dispatch({ type: "LOGIN_ERROR" })
@@ -87,7 +145,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     dispatch({ type: "SIGNUP_START" })
     try {
       const user = await mockSignup(email, password, name)
-      localStorage.setItem("techstore-user", JSON.stringify(user))
+      localStorage.setItem("kawtar-tech-store-user", JSON.stringify(user))
       dispatch({ type: "SIGNUP_SUCCESS", user })
     } catch (error) {
       dispatch({ type: "SIGNUP_ERROR" })
@@ -97,7 +155,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     await mockLogout()
-    localStorage.removeItem("techstore-user")
+    localStorage.removeItem("kawtar-tech-store-user")
     dispatch({ type: "LOGOUT" })
   }
 

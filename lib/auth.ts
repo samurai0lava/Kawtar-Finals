@@ -15,14 +15,14 @@ export interface AuthState {
 // Mock user data for demonstration
 const mockUsers: Record<string, { email: string; password: string; name: string }> = {
   user1: {
-    email: "john@example.com",
+    email: "kawtar@kawtar-tech-store.com",
     password: "password123",
-    name: "John Doe",
+    name: "Kawtar",
   },
   user2: {
-    email: "jane@example.com",
+    email: "admin@kawtar-tech-store.com",
     password: "password123",
-    name: "Jane Smith",
+    name: "Kawtar Admin",
   },
 }
 

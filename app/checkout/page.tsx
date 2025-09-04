@@ -42,9 +42,9 @@ export default function CheckoutPage() {
   const total = items.length > 0 ? subtotal + shipping + tax : demoTotal
 
   const [shippingAddress, setShippingAddress] = useState<ShippingAddress>({
-    firstName: user?.name.split(" ")[0] || "Demo",
-    lastName: user?.name.split(" ")[1] || "User",
-    email: user?.email || "demo@techstore.com",
+    firstName: user?.name.split(" ")[0] || "Kawtar",
+    lastName: user?.name.split(" ")[1] || "",
+    email: user?.email || "kawtar@kawtar-tech-store.com",
     phone: "+1 (555) 123-4567",
     address: "123 Tech Street",
     city: "San Francisco",
@@ -55,10 +55,10 @@ export default function CheckoutPage() {
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>({
     type: "card",
-    cardNumber: "4000 0000 0000 0002",
-    expiryDate: "12/25",
-    cvv: "123",
-    cardholderName: "Demo User",
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
+    cardholderName: "",
   })
 
   useEffect(() => {

@@ -48,7 +48,7 @@ export default function HomePage() {
                 <Smartphone className="w-5 h-5 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-balance">TechStore</h1>
+                <h1 className="text-2xl font-bold text-balance">Kawtar-tech-store</h1>
                 <div className="flex items-center gap-1 text-xs text-muted-foreground">
                   <Shield className="w-3 h-3 text-green-600" />
                   <span>FIDO 3DS Secured</span>
@@ -135,7 +135,7 @@ export default function HomePage() {
       <footer className="bg-card border-t mt-16">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center text-muted-foreground">
-            <p>&copy; 2024 TechStore. All rights reserved.</p>
+            <p>&copy; 2024 Kawtar-tech-store. All rights reserved.</p>
           </div>
         </div>
       </footer>

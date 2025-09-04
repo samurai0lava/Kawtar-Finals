@@ -79,7 +79,7 @@ export function AuthDialog({ children }: AuthDialogProps) {
                 <Input
                   id="login-email"
                   type="email"
-                  placeholder="john@example.com"
+                  placeholder="kawtar@kawtar-tech-store.com"
                   value={loginForm.email}
                   onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
                   required
@@ -112,8 +112,8 @@ export function AuthDialog({ children }: AuthDialogProps) {
             </form>
             <div className="text-sm text-muted-foreground text-center">
               <p>Demo accounts:</p>
-              <p>john@example.com / password123</p>
-              <p>jane@example.com / password123</p>
+              <p>kawtar@kawtar-tech-store.com / password123</p>
+              <p>admin@kawtar-tech-store.com / password123</p>
             </div>
           </TabsContent>
 
@@ -124,7 +124,7 @@ export function AuthDialog({ children }: AuthDialogProps) {
                 <Input
                   id="signup-name"
                   type="text"
-                  placeholder="John Doe"
+                  placeholder="Kawtar"
                   value={signupForm.name}
                   onChange={(e) => setSignupForm({ ...signupForm, name: e.target.value })}
                   required
@@ -135,7 +135,7 @@ export function AuthDialog({ children }: AuthDialogProps) {
                 <Input
                   id="signup-email"
                   type="email"
-                  placeholder="john@example.com"
+                  placeholder="kawtar@kawtar-tech-store.com"
                   value={signupForm.email}
                   onChange={(e) => setSignupForm({ ...signupForm, email: e.target.value })}
                   required
