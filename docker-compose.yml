@@ -10,4 +10,4 @@ services:
     environment:
       - NODE_ENV=production
     restart: unless-stopped
-    container_name: kawtar-finals-app
+    container_name: 3DSHubDemo
